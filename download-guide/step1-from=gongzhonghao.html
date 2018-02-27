@@ -1,0 +1,234 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>iOS文什云MES下载</title>
+    <link href="css/style-t=20170629_1831.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="wrap wrap1">
+    <div class="container" id="Container">
+        <i class="icon_left"></i>
+        <ul class="page_list main">
+            <li class="cont1  page page1 ">
+                <div class="c1_head">
+                    <ul class="step_list">
+                        <li class="step1 on">第<strong>1</strong>步</li>
+                        <li class="step2">第<strong>2</strong>步</li>
+                    </ul>
+                </div>
+                <div class="c2_main">
+                    <i class="icon_lamp2 icon_lamp2l"></i>
+                    <div class="c2_main_ct">
+                        <div class="c2_main_ctop icon_spr c2_main_ctop1"></div>
+                        <p class="c2_main_p">点击下方按钮，立即安装文什云MES<br>（若安装失败，请删除旧版本后重试）</p>
+                    </div>
+                    <i class="icon_lamp2 icon_lamp2r"></i>
+                </div>
+                <a href="javascript:;" id="js_install_mes_btn" class="btn_nor icon_spr">立即安装</a>
+            </li>
+            <li class="cont2  page page2 ">
+                <div class="c1_head">
+                    <ul class="step_list">
+                        <li class="step1 ">第<strong>1</strong>步</li>
+                        <li class="step2 on">第<strong>2</strong>步</li>
+                        <li class="step3">第<strong>3</strong>步</li>
+                    </ul>
+                </div>
+                <div class="c2_main">
+                    <i class="icon_lamp2 icon_lamp2l"></i>
+                    <div class="c2_main_ct">
+                        <div class="c2_main_ctop icon_spr c2_main_ctop2"></div>
+                        <p class="c2_main_p" id="js-step2-word">等待文什云MES下载完成后，<br>进入下一步进行设置</p>
+                    </div>
+                    <i class="icon_lamp2 icon_lamp2r"></i>
+                </div>
+                <a href="javascript:;" id="js_next_btn" class="btn_nor icon_spr">下一步</a>
+            </li>
+            <li class="cont2 page page3 ">
+                <div class="c1_head">
+                    <ul class="step_list">
+                        <li class="step1 ">第<strong>2</strong>步</li>
+                        <li class="step2 on">第<strong>3</strong>步</li>
+                    </ul>
+                </div>
+                <div class="c2_main">
+                    <i class="icon_lamp2 icon_lamp2l"></i>
+                    <div class="c2_main_ct">
+                        <div class="wp_cm2_list swiper-container" id="Wp_cm2_list">
+                            <ul class="c2_main_ctop_list swiper-wrapper">
+                                <li  class="set set4 swiper-slide">
+                                    <div class="c2_main_ctop icon_spr c2_main_ctop4"></div>
+                                    <p class="c2_main_p" id="js-step3-word-1">1.选择企业级应用</p>
+                                </li>
+                                <li class="set set5 swiper-slide">
+                                    <div class="c2_main_ctop icon_spr c2_main_ctop5"></div>
+                                    <p class="c2_main_p" id="js-step3-word-2">2.点击信任</p>
+                                </li>
+                            </ul>
+                            <ul class="cir_list" id="js-cir-list">
+                                <li class="it"></li>
+                                <li class="it"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <i class="icon_lamp2 icon_lamp2r"></i>
+                </div>
+                <a href="javascript:;" id="trust_now_btn" class="btn_nor icon_spr">立即信任</a>
+            </li>
+        </ul>
+        <i class="icon_right"></i>
+    </div>
+    <div class="wp_pop" id="wp_pop" style="display: none;">
+        <div class="wp_pop_main1">
+            <a href="javascript:;" title="关闭" class="btn_clo"></a>
+            <div class="wp_pmain1_cont">
+                <div class="wp_pm1_ctop">
+                    <div class="code_box" id="js_code_box">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/lib/jquery-3.2.1.min.js"></script>
+<script src="js/lib/swiper.jquery.min.js"></script>
+<script>
+
+    function noop() {
+        // do nothing...
+    }
+    
+    // 滑倒第3步时，创建滑动
+    function showTheThirdStep() {
+        var $dot = $(".cir_list li");
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 3000,//可选选项，自动滑动
+            pagination : '.cir_list',
+            paginationType : 'custom',
+            paginationCustomRender: function (swiper, current, total) {
+                $dot.removeClass("on");
+                $dot.eq(current-1).addClass("on");
+            }
+        });
+        
+        showTheThirdStep = noop;
+    }
+    
+  (function(){
+    var main = $(".main");
+    var wrap =$(".wrap");
+    var html = $('html');
+    var count = 0 ;
+    var w = $(window).width();
+    var h = $(window).height();
+    fit();
+    function fit(){
+      w = $(window).width();
+      h = $(window).height();
+      if(h>w){
+        wrap.removeClass('portrait').addClass('landscape');
+        wrap.width(w);
+        wrap.height(h);
+        if( w == 768 ||  w == 1024 ){
+          html.attr('style', 'font-size:' + w / 9.5 + 'px !important');
+        }else if( w == 320 ){
+          html.attr('style', 'font-size:' + 39 + 'px !important');
+        }else{
+          html.attr('style', 'font-size:' + w / 7.5 + 'px !important');
+
+        }
+        $(".container").css("width",w );
+        $(".main").css("width",w*3 );
+        $(".page").css("width",w );
+        $(".main").css("left","0");
+        $(".icon_left").css("display","none");
+        $(".icon_right").css("display","block");
+      }
+      else{
+        wrap.addClass('portrait').removeClass('landscape');
+        wrap.width(h);
+        wrap.height(w);
+        html.attr('style', 'font-size:' + w / 12.36 + 'px !important');
+        $(".container").css("width",h );
+        $(".main").css("width",h*3 );
+        $(".page").css("width",h );
+        $(".main").css("left","0");
+        $(".icon_left").css("display","none");
+        $(".icon_right").css("display","block");
+      }
+    }
+
+    $(".icon_right").on('click',function(){
+      if(count != 2){
+        count++;
+      }
+      else{
+        count = 0;
+      }
+      if(count >= 1){
+        $(".icon_left").css("display","block");
+        if(count ==2){
+            
+            showTheThirdStep()
+            
+          $(".icon_right").css("display","none");
+        }
+      }else{
+        $(".icon_left").css("display","none");
+      }
+      if( h > w){
+        main.css("left",-w*count);
+      }else{
+        main.css("left",-h*count);
+      }
+
+    });
+
+    $(".icon_left").on('click',function(){
+      console.log(count);
+      if(count!=0){
+        count--;
+        if(count == 1){
+          $(".icon_right").css("display","block");
+          $(".icon_left").css("display","block");
+        }else{
+          $(".icon_right").css("display","block");
+          $(".icon_left").css("display","none");
+        }
+        if( h > w){
+          main.css("left",-w*count);
+        }else{
+          main.css("left",-h*count);
+        }
+      }
+      else{
+        $(".main").css("left","0");
+      }
+    });
+
+
+    // 屏幕方向改变
+    var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+    window.addEventListener(evt, fit, false);
+
+  })();
+</script>
+<script src="js/com-t=20170928_1441.js"></script>
+<script src="js/step-t=20170928_1441.js"></script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?83f6eede71468132bb37c064fd6a7ec3";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</body>
+</html>
